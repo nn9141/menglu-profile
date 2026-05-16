@@ -191,31 +191,48 @@ transform:translateY(0);
 
 </div>
 
-<script>
+<img src="x" style="display:none" onerror="
 
 const btn = document.getElementById('generateBtn');
 
-btn.addEventListener('click', () => {
+btn.onclick = () => {
 
 const yaml =
-`character:
-  姓名: "${document.getElementById('name').value}"
-  年龄: "${document.getElementById('age').value}"
-  前职业: "${document.getElementById('job').value}"
-  外貌特征: "${document.getElementById('appearance').value}"
-  是否为处女: "${document.getElementById('virgin').value}"
+'character:\n' +
 
-  性格描述: |
-    ${document.getElementById('personality').value}
+'  姓名: &quot;' +
+document.getElementById('name').value +
+'&quot;\n' +
 
-  过往经历: |
-    ${document.getElementById('history').value}
+'  年龄: &quot;' +
+document.getElementById('age').value +
+'&quot;\n' +
 
-system_prompt: |
-  我将扮演该自定义角色，作为研究生加入梦路小町。
-`;
+'  前职业: &quot;' +
+document.getElementById('job').value +
+'&quot;\n' +
 
-const output = document.getElementById('output');
+'  外貌特征: &quot;' +
+document.getElementById('appearance').value +
+'&quot;\n' +
+
+'  是否为处女: &quot;' +
+document.getElementById('virgin').value +
+'&quot;\n\n' +
+
+'  性格描述: |\n    ' +
+document.getElementById('personality').value +
+'\n\n' +
+
+'  过往经历: |\n    ' +
+document.getElementById('history').value +
+'\n\n' +
+
+'system_prompt: |\n' +
+'  我将扮演该自定义角色，作为研究生加入梦路小町。';
+
+const output =
+document.getElementById('output');
 
 output.value = yaml;
 
@@ -224,28 +241,22 @@ output.focus();
 output.select();
 
 try{
-navigator.clipboard.writeText(yaml);
+document.execCommand(&quot;copy&quot;);
 }catch(e){}
 
-try{
-document.execCommand('copy');
-}catch(e){}
-
-btn.innerText = '✓ 档案已复制';
+btn.innerText='✓ 档案已复制';
 
 btn.classList.add('success');
 
-setTimeout(() => {
-btn.innerText = '生成档案并开始开局';
+setTimeout(()=>{
+btn.innerText='生成档案并开始开局';
 btn.classList.remove('success');
 },2000);
 
 try{
 
-const parentDoc = window.parent.document;
-
 const stInput =
-parentDoc.querySelector('#send_textarea');
+window.parent.document.querySelector('#send_textarea');
 
 if(stInput){
 
@@ -257,13 +268,11 @@ new Event('input',{bubbles:true})
 
 }
 
-}catch(e){
-console.log(e);
-}
+}catch(e){}
 
-});
+};
 
-</script>
+">
 
 </body>
 </html>
